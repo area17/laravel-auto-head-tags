@@ -3,7 +3,7 @@
 return [
     'meta' => [
         ['charset' => 'utf-8'],
-        ['http-equiv' => 'X-UA-Compatible', 'content' => 'IE=Edge'>
+        ['http-equiv' => 'X-UA-Compatible', 'content' => 'IE=Edge'],
 
         ['property' => 'og:title', 'content' => '{ogTitle}'],
         ['property' => 'og:title', 'content' => '{ogTitle}'],
