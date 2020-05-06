@@ -7,14 +7,7 @@
 [![Quality Score][ico-code-quality]][link-code-quality]
 [![Total Downloads][ico-downloads]][link-downloads]
 
-This package allows you to create transformers to generate view data for your Twill app. It contains a base Transformer 
-class and a series of traits, allowing you not only to transform model data, but also generate all blocks, from Twill's block editor and preview data.
-
 ## Reasoning
-
-The main class of this package was extracted from the work we did for a client where we decided to use Storybook and Twig templates 
-to build the front end. The idea is to free the back end developer from writing front-end code. For this to happen, the whole data
-generation is automated, starting from the controller `view()` call.
 
 ## Install
 
