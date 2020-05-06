@@ -1,12 +1,12 @@
 {
-    "name": "area17/twill-metas",
+    "name": "area17/twill-head",
     "type": "library",
-    "description": "Twill Metas",
+    "description": "Twill Head helps you build the list of head elements for your app",
     "keywords": [
         "area17",
-        "twill-metas"
+        "twill-head"
     ],
-    "homepage": "https://github.com/area17/twill-metas",
+    "homepage": "https://github.com/area17/twill-head",
     "license": "MIT",
     "authors": [
         {
@@ -25,13 +25,13 @@
     },
     "autoload": {
         "psr-4": {
-            "A17\\TwillMetas\\": "src"
+            "A17\\TwillHead\\": "src"
         },
         "files": ["src/Support/helpers.php"]
     },
     "autoload-dev": {
         "psr-4": {
-            "A17\\TwillMetas\\": "tests"
+            "A17\\TwillHead\\": "tests"
         }
     },
     "scripts": {
@@ -42,7 +42,7 @@
     "extra": {
         "laravel": {
             "providers": [
-                "A17\\TwillMetas\\ServiceProvider"
+                "A17\\TwillHead\\ServiceProvider"
             ]
         },
         "branch-alias": {

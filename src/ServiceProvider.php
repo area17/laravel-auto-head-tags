@@ -1,7 +1,8 @@
 <?php
 
-namespace A17\TwillMetas;
+namespace A17\TwillHead;
 
+use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\ServiceProvider as IlluminateServiceProvider;
 
 class ServiceProvider extends IlluminateServiceProvider
@@ -16,8 +17,8 @@ class ServiceProvider extends IlluminateServiceProvider
     public function register()
     {
         $this->mergeConfigFrom(
-            __DIR__ . '/../config/twill-metas.php',
-            'twill-metas',
+            __DIR__ . '/../config/twill-head.php',
+            'twill-head',
         );
     }
 
@@ -25,8 +26,8 @@ class ServiceProvider extends IlluminateServiceProvider
     {
         $this->publishes(
             [
-                __DIR__ . '/../config/twill-metas.php' => config_path(
-                    'twill-metas.php',
+                __DIR__ . '/../config/twill-head.php' => config_path(
+                    'twill-head.php',
                 ),
             ],
             'config',
@@ -35,8 +36,8 @@ class ServiceProvider extends IlluminateServiceProvider
 
     public function configureBlade()
     {
-        Blade::directive('twill-metas', function ($expression) {
-            return "<?php echo 'metas'; ?>";
+        Blade::directive('twillhead', function ($expression) {
+            return Head::render();
         });
     }
 }

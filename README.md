@@ -1,4 +1,4 @@
-# Twill Metas
+# Twill Head
 
 [![Latest Version on Packagist][ico-version]][link-packagist]
 [![Software License][ico-license]](LICENSE.md)
@@ -21,13 +21,13 @@ generation is automated, starting from the controller `view()` call.
 ### Via Composer
 
 ``` bash
-composer require area17/twill-metas
+composer require area17/twill-head
 ```
 
 ### Publish the config file
 
 ``` bash
-php artisan vendor:publish --provider="A17\TwillMetas\ServiceProvider"
+php artisan vendor:publish --provider="A17\TwillHead\ServiceProvider"
 ```
 
 # ADD DOCUMENTATION!
@@ -60,17 +60,17 @@ If you discover any security related issues, please email antonio@area17.com ins
 
 The MIT License (MIT). Please see [License File](LICENSE.md) for more information.
 
-[ico-version]: https://img.shields.io/packagist/v/area17/twill-metas.svg?style=flat-square
+[ico-version]: https://img.shields.io/packagist/v/area17/twill-head.svg?style=flat-square
 [ico-license]: https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat-square
-[ico-travis]: https://img.shields.io/travis/area17/twill-metas/master.svg?style=flat-square
-[ico-scrutinizer]: https://img.shields.io/scrutinizer/coverage/g/area17/twill-metas.svg?style=flat-square
-[ico-code-quality]: https://img.shields.io/scrutinizer/g/area17/twill-metas.svg?style=flat-square
-[ico-downloads]: https://img.shields.io/packagist/dt/area17/twill-metas.svg?style=flat-square
+[ico-travis]: https://img.shields.io/travis/area17/twill-head/master.svg?style=flat-square
+[ico-scrutinizer]: https://img.shields.io/scrutinizer/coverage/g/area17/twill-head.svg?style=flat-square
+[ico-code-quality]: https://img.shields.io/scrutinizer/g/area17/twill-head.svg?style=flat-square
+[ico-downloads]: https://img.shields.io/packagist/dt/area17/twill-head.svg?style=flat-square
 
-[link-packagist]: https://packagist.org/packages/area17/twill-metas
-[link-travis]: https://travis-ci.org/area17/twill-metas
-[link-scrutinizer]: https://scrutinizer-ci.com/g/area17/twill-metas/code-structure
-[link-code-quality]: https://scrutinizer-ci.com/g/area17/twill-metas
-[link-downloads]: https://packagist.org/packages/area17/twill-metas
+[link-packagist]: https://packagist.org/packages/area17/twill-head
+[link-travis]: https://travis-ci.org/area17/twill-head
+[link-scrutinizer]: https://scrutinizer-ci.com/g/area17/twill-head/code-structure
+[link-code-quality]: https://scrutinizer-ci.com/g/area17/twill-head
+[link-downloads]: https://packagist.org/packages/area17/twill-head
 [link-author]: https://github.com/antonioribeiro
 [link-contributors]: ../../contributors
