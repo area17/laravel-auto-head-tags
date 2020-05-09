@@ -84,7 +84,7 @@ php artisan vendor:publish --provider="A17\TwillHead\ServiceProvider"
 
 Add the tag `@twillhead` to your main template:
 
-```
+``` html
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
     <head>
@@ -159,7 +159,7 @@ If it's required to generate more than one URL for a single tag definition, ther
 
 If `seo.urls.hreflang` is an array made of locales (`key`) and URLs (`value`), this configuration will generate these tags:
 
-``` yaml
+``` html
 <link rel="canonical" href="http://site.com/fr/events/event-slug" />
 <link rel="alternate" href="http://site.com/fr/evenements/event-slug" hreflang="fr" />
 <link rel="alternate" href="http://site.com/en/events/event-slug" hreflang="en" />
