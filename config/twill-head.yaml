@@ -8,8 +8,10 @@ delimiters:
 macro:
     regex_parser: "/^{(.*)}$/"
 tag:
-    html_pattern: "<{tagName} {properties} />" # https://www.w3.org/TR/xhtml1/#guidelines
-    property_pattern: "{name}=\"{value}\""
+    with_properties_format: "<{tagName} {value} />" # https://www.w3.org/TR/xhtml1/#guidelines
+    without_properties_format: "<{tagName}>{value}</{tagName}>"
+    property_format: "{propertyName}=\"{value}\""
+    value_only_format: "{value}"
     line_break: "\n\r"
     indent:
         spaces: 8
@@ -17,18 +19,24 @@ tag:
 
 # TAGS
 tags:
+    # TITLE
+
+    title: "{title}|{head.title}|{seo.title}|{og.title}"
+
     # META
 
     # HEAD
     meta:
     - charset: "{head.charset}|utf-8"
+    - http-equiv: "Content-Type"
+      content: "{head.http-equiv.content-type}|text/html; charset=utf-8"
+    - http-equiv: "X-UA-Compatible"
+      content: "{head.http-equiv.x-ua-compatible}|IE=Edge"
+    - name: robots
+      content: "{head.robots}"
     - name: viewport
       content: "{head.viewport}|width=device-width, initial-scale=1.0, minimum-scale=1"
                               # width=device-width, initial-scale=1                           ????
-    - name: author
-      content: "{head.author}"
-    - http-equiv: "X-UA-Compatible"
-      content: "{head.httpEquiv}|IE=Edge"
     - name: mobile-web-app-capable
       content: "{head.mobile-web-app-capable}|yes"
     - name: apple-mobile-web-app-capable
@@ -83,9 +91,9 @@ tags:
       content: "{twitter.app.googleplay.url}"
 
     # SEO
+    - name: title
+      content: "{seo.title}"
     - name: description
-      content: "{seo.description}"
-    - name: twitter:description
       content: "{seo.description}"
     - name: msapplication-TileColor
       content: "#ffffff"
@@ -106,7 +114,7 @@ tags:
     - property: og:title
       content: "{og.title}|{$config.app.name}"
     - property: og:site_name
-      content: "{og.site_name}|{$config.app.name}"
+      content: "{og.site-name}|{$config.app.name}"
     - property: og:description
       content: "{seo.description}"
     - property: og:url
@@ -126,7 +134,7 @@ tags:
     - property: og:image:height
       content: '{og.image.height}|630'
     - property: og:image:secure_url
-      content: '{og.image.secure_url}'
+      content: '{og.image.secure-url}'
     - property: og:image:type
       content: '{og.image.type}'
     - property: og:image:alt
@@ -141,7 +149,7 @@ tags:
     - property: og:video:height
       content: '{og.video.height}'
     - property: og:video:secure_url
-      content: '{og.video.secure_url}|{og.video.url}'
+      content: '{og.video.secure-url}|{og.video.url}'
     - property: og:video:type
       content: '{og.video.type}'
     - property: og:video:alt
@@ -150,7 +158,7 @@ tags:
     - property: og:audio
       content: '{og.audio}'
     - property: og:audio:secure_url
-      content: '{og.audio.secure_url}'
+      content: '{og.audio.secure-url}'
     - property: og:audio:type
       content: '{og.audio.type}'
 
