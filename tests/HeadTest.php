@@ -14,7 +14,7 @@ class HeadTest extends TestCase
 
     protected $data = [
         'seo' => [
-            'title' => 'Your page title',
+            'title' => 'SEO - Your page title',
 
             'description' => 'The meta description for the page',
 
@@ -37,8 +37,8 @@ class HeadTest extends TestCase
         ],
 
         'og' => [
-            [
-                'title' => 'Title',
+
+                'title' => 'OG - Your page title',
 
                 'site-name' => 'App name',
 
@@ -73,7 +73,7 @@ class HeadTest extends TestCase
 
                     'type' => 'text/html',
                 ],
-            ],
+
         ],
     ];
 
@@ -101,6 +101,10 @@ class HeadTest extends TestCase
 
     public function testCanRenderHead()
     {
-        $this->assertNotEmpty($this->head->render());
+        $rendered = $this->head->render();
+
+        dd($rendered);
+
+        $this->assertStringContainsString('<meta name="twitter:title" content="OG - Your page title" />', $rendered);
     }
 }
