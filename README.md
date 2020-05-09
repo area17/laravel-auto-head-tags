@@ -7,7 +7,60 @@
 [![Quality Score][ico-code-quality]][link-code-quality]
 [![Total Downloads][ico-downloads]][link-downloads]
 
-## Reasoning
+## Description
+
+This package aims to ease the creating of all HTML head tags: meta, links, SEO, Open Graph, Twitter and whatever else you need. 
+
+The package will grab all the info it needs from the data sent to Blade:
+
+``` php
+return view('welcome', [
+    'seo' => [
+        'title' => 'Your page title',
+
+        'description' => 'The meta description for the page',
+
+        'urls' => [
+            'canonical' => 'https://site.com/the-article-slug
+        ],
+    ]
+
+    'twitter' => [
+        'handle' => '@opticalcortex'
+    ]
+
+    'image' => [
+        'url' => 'https://site.com/image.jpg'
+    ]
+]);
+```
+
+The script should generate, out of the box, this set of tags for you:
+
+``` html
+<title>Your page title</title>
+<meta name="title" content="Your page title" />
+<meta charset="utf-8" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1" />
+<meta name="mobile-web-app-capable" content="yes" />
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<meta name="apple-mobile-web-app-title" content="Your page title" />
+<meta property="og:title" content="Your page title" />
+<meta property="og:url" content="https://site.com/the-article-slug" />
+<meta property="og:image" content="https://site.com/image.jpg" />
+<meta property="og:image:secure_url" content="https://site.com/image.jpg" />
+<meta property="og:description" content="The meta description for the page" />
+<meta name="twitter:title" content="Your page title" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:url" content="https://site.com/the-article-slug" />
+<meta name="twitter:image" content="https://site.com/image.jpg" />
+<meta name="twitter:site" content="@opticalcortex" />
+<meta name="twitter:creator" content="@opticalcortex" />
+<meta name="description" content="The meta description for the page" />
+<link rel="canonical" href="https://site.com/the-article-slug" />        
+```
 
 ## Install
 
@@ -23,7 +76,92 @@ composer require area17/twill-head
 php artisan vendor:publish --provider="A17\TwillHead\ServiceProvider"
 ```
 
-# ADD DOCUMENTATION!
+# Using
+
+## Add to your blade template
+
+Add the tag `@twillhead` to your main template:
+
+```
+<!DOCTYPE html>
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+    <head>
+        <title>{{ config('app.name') }}</title>
+
+        <meta name="version" charset="@version">
+
+        @twillhead
+
+        ...
+    </head>
+
+    <body>
+        ...
+    </body>
+</html>
+``` 
+
+## Configuring 
+
+All available tags are on the config file: `config/twill-head.yaml`, and everything is configurable. This is an extract of the tags section:
+
+``` yaml
+# TAGS
+tags:
+    # META
+
+    # HEAD
+    meta:
+    - charset: "{head.charset}|utf-8"
+    - name: viewport
+      content: "{head.viewport}|width=device-width, initial-scale=1.0, minimum-scale=1"
+    - name: author
+      content: "{head.author}"
+    - http-equiv: "X-UA-Compatible"
+      content: "{head.httpEquiv}|IE=Edge"
+    - name: mobile-web-app-capable
+      content: "{head.mobile-web-app-capable}|yes"
+    - name: apple-mobile-web-app-capable
+      content: "{head.apple-mobile-web-app-capable}|yes"
+    - name: apple-mobile-web-app-title
+      content: "{head.apple-mobile-web-app-title}|{og.title}|{$config.app.name}"
+```
+
+You can define macros using `{}` and the package can access the Blade data using the "dot" notation for arrays:
+
+``` yaml
+content: "{head.author}"
+```
+
+You can define as many fallbacks you need for those macros:
+
+``` yaml
+content: "{head.apple-mobile-web-app-title}|{og.title}|{title}"
+```
+
+And you can also access data from the Laravel config:
+
+``` yaml
+content: "{$config.app.name}"
+```
+
+If it's required to generate more than one URL for a single tag definition, there's `loop` concept:
+
+``` yaml
+- rel: canonical
+  href: "{seo.urls.canonical}"
+- rel: alternate
+  href: "{seo.urls.hreflang:value}"
+  hreflang: "{seo.urls.hreflang:key}"
+```
+
+If `seo.urls.hreflang` is an array made of locales (`key`) and URLs (`value`), this configuration will generate these tags:
+
+``` yaml
+<link rel="canonical" href="http://site.com/fr/events/event-slug" />
+<link rel="alternate" href="http://site.com/fr/evenements/event-slug" hreflang="fr" />
+<link rel="alternate" href="http://site.com/en/events/event-slug" hreflang="en" />
+```
 
 ## Change log
 
