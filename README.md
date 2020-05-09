@@ -86,18 +86,14 @@ Add the tag `@twillhead` to your main template:
 
 ``` html
 <!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+<html lang="{{ locale() }}">
     <head>
-        <meta name="version" charset="@version">
-
         @twillhead
 
         ...
     </head>
 
-    <body>
-        ...
-    </body>
+    ...
 </html>
 ``` 
 
