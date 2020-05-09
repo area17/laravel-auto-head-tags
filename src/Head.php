@@ -189,6 +189,48 @@ class Head
         return collect($result);
     }
 
+    private function generateTagWithValue(string $tagName, string $value)
+    {
+    }
+
+    /**
+     * @param $tagName
+     * @param $tags
+     * @return \Illuminate\Support\Collection
+     */
+    private function generateTagsWithProperties(
+        $tagName,
+        $tags
+    ): \Illuminate\Support\Collection {
+        return collect($tags)
+            ->map(function ($properties) use ($tagName) {
+                return $this->generatePropertiesArray($properties)->map(
+                    fn($properties) => $this->generateTag(
+                        $tagName,
+                        $properties,
+                    ),
+                );
+            })
+            ->filter();
+    }
+
+    /**
+     * @param $tagName
+     * @param $tags
+     * @return \Illuminate\Support\Collection
+     */
+    private function generateTagsWithoutProperties($tagName, $tags): Collection
+    {
+        return collect(
+            $this->generateTag(
+                $tagName,
+                $tags,
+                'tag.without_properties_format',
+                'tag.value_only_format',
+            ),
+        )->filter();
+    }
+
     /**
      * @return mixed
      */
@@ -303,36 +345,37 @@ class Head
      */
     public function generateTags($tagName, $tags)
     {
-        return collect($tags)
-            ->map(function ($properties) use ($tagName) {
-                return $this->generatePropertiesArray($properties)->map(
-                    fn($properties) => $this->generateTag(
-                        $tagName,
-                        $properties,
-                    ),
-                );
-            })
-            ->filter();
+        return is_string($tags)
+            ? $this->generateTagsWithoutProperties($tagName, $tags)
+            : $this->generateTagsWithProperties($tagName, $tags);
     }
 
     /**
      * @param $tagName
-     * @param $properties
+     * @param $value
+     * @param string $tagFormat
+     * @param string $propertiesFormat
      * @return string|null
      */
-    public function generateTag($tagName, $properties)
-    {
-        $properties = $this->generateProperties($tagName, $properties)->implode(
-            ' ',
-        );
+    public function generateTag(
+        $tagName,
+        $value,
+        $tagFormat = 'tag.with_properties_format',
+        $propertiesFormat = 'tag.property_format'
+    ) {
+        $value = $this->generateProperties(
+            $tagName,
+            $value,
+            $propertiesFormat,
+        )->implode(' ');
 
-        if (filled($properties)) {
+        if (filled($value)) {
             return $this->getIndent() .
                 str_replace(
-                    ['{tagName}', '{properties}'],
-                    [$tagName, $properties],
+                    ['{tagName}', '{value}'],
+                    [$tagName, $value],
 
-                    $this->config('tag.html_pattern'),
+                    $this->config($tagFormat),
                 );
         }
 
@@ -342,11 +385,15 @@ class Head
     /**
      * @param $tagName
      * @param $properties
+     * @param string $format
      * @return \Illuminate\Support\Collection
      */
-    public function generateProperties($tagName, $properties)
-    {
-        $properties = collect($properties)->map(function ($value, $key) {
+    public function generateProperties(
+        $tagName,
+        $properties,
+        $format = 'tag.property_format'
+    ) {
+        $properties = collect($properties)->map(function ($value, $key) use ($format) {
             $value = $this->generateValue($value);
 
             return [
@@ -354,9 +401,9 @@ class Head
                 'value' => $value,
                 'rendered' => filled($value)
                     ? str_replace(
-                        ['{name}', '{value}'],
+                        ['{propertyName}', '{value}'],
                         [$key, $value],
-                        $this->config('tag.property_pattern'),
+                        $this->config($format),
                     )
                     : null,
             ];
