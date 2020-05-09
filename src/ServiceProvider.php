@@ -8,6 +8,9 @@ use Illuminate\Support\ServiceProvider as IlluminateServiceProvider;
 
 class ServiceProvider extends IlluminateServiceProvider
 {
+    /**
+     * Boot
+     */
     public function boot()
     {
         $this->publishConfig();
@@ -15,11 +18,17 @@ class ServiceProvider extends IlluminateServiceProvider
         $this->configureBlade();
     }
 
+    /**
+     * Register
+     */
     public function register()
     {
         $this->mergeConfig();
     }
 
+    /**
+     * Publish config
+     */
     public function publishConfig()
     {
         $this->publishes(
@@ -32,6 +41,9 @@ class ServiceProvider extends IlluminateServiceProvider
         );
     }
 
+    /**
+     * Configure blade
+     */
     public function configureBlade()
     {
         Blade::directive('twillhead', function ($expression) {
@@ -39,6 +51,9 @@ class ServiceProvider extends IlluminateServiceProvider
         });
     }
 
+    /**
+     * Merge config
+     */
     public function mergeConfig()
     {
         $app = config_path('twill-head.yaml');

@@ -1,78 +1,184 @@
 ---
-# META TAGS
-meta:
-- charset: utf-8
-- http-equiv: "{httpEquiv}|||X-UA-Compatible"
-  content: IE=Edge
-- property: og:title
-  content: "{ogTitle}"
-- property: og:title
-  content: "{ogTitle}"
-- property: og:title
-  content: "{ogTitle}"
-- property: og:site_name
-  content: "{ogSiteName}"
-- property: og:locale
-  content: "{ogLocale}"
-- property: og:type
-  content: website
-- property: og:description
-  content: "{ogDescription}"
-- property: og:url
-  content: "{seo.urls.canonical}"
-- property: og:image
-  content: "{ogImage}"
-- property: og:image:width
-  content: '1200'
-- property: og:image:height
-  content: '630'
-- name: viewport
-  content: width=device-width, initial-scale=1.0, minimum-scale=1
-- name: twitter:title
-  content: "{twitterTitle}"
-- name: twitter:site
-  content: "{twitterHandle}"
-- name: description
-  content: "{description}"
-- name: twitter:description
-  content: "{twitterDescription}"
-- name: twitter:card
-  content: summary_large_image
-- name: twitter:image
-  content: "{twitterImage}"
-- name: twitter:url
-  content: "{seo.urls.canonical}"
-- name: msapplication-TileColor
-  content: "#ffffff"
-- name: msapplication-config
-  content: "/dist/images/favicons/browserconfig.xml"
-- name: theme-color
-  content: "#ffffff"
-- itemprop: name
-  content: "{title}"
-- itemprop: description
-  content: "{description}"
-- itemprop: image
-  content: "{seoImage }"
+# CONFIG
+config:
+    key: "$config"
+delimiters:
+    fallback: "|"
+    loop: ":"
+macro:
+    regex_parser: "/^{(.*)}$/"
+tag:
+    html_pattern: "<{tagName} {properties} />" # https://www.w3.org/TR/xhtml1/#guidelines
+    property_pattern: "{name}=\"{value}\""
+    line_break: "\n\r"
+    indent:
+        spaces: 8
+        tabs: 0
 
-# LINK TAGS
-link:
-- rel: canonical
-  href: "{seo.urls.canonical}"
-- rel: apple-touch-icon
-  sizes: 180x180
-  href: "/dist/images/favicons/apple-touch-icon.png"
-- rel: icon" type="image/png
-  sizes: 32x32
-  href: "/dist/images/favicons/favicon-32x32.png"
-- rel: icon" type="image/png
-  sizes: 16x16
-  href: "/dist/images/favicons/favicon-16x16.png"
-- rel: manifest
-  href: "/dist/images/favicons/site.webmanifest"
-- rel: mask-icon
-  href: /dist/images/favicons/safari-pinned-tab.svg" color="#000000
-- rel: shortcut icon
-  href: "/dist/images/favicons/favicon.ico"
-- rel: icon
-  href: "/dist/images/favicons/favicon.svg"
+# TAGS
+tags:
+    # META
+
+    # HEAD
+    meta:
+    - charset: "{head.charset}|utf-8"
+    - name: viewport
+      content: "{head.viewport}|width=device-width, initial-scale=1.0, minimum-scale=1"
+                              # width=device-width, initial-scale=1                           ????
+    - name: author
+      content: "{head.author}"
+    - http-equiv: "X-UA-Compatible"
+      content: "{head.httpEquiv}|IE=Edge"
+    - name: mobile-web-app-capable
+      content: "{head.mobile-web-app-capable}|yes"
+    - name: apple-mobile-web-app-capable
+      content: "{head.apple-mobile-web-app-capable}|yes"
+    - name: apple-mobile-web-app-title
+      content: "{head.apple-mobile-web-app-title}|{og.title}|{$config.app.name}"
+
+    # TWITTER
+    - name: twitter:title
+      content: "{twitter.title}|{og.title}|{$config.app.name}"
+    - name: twitter:site
+      content: "{twitter.site.name}|{twitter.handle}"
+    - name: twitter:site:id
+      content: "{twitter.site.id}"
+    - name: twitter:description
+      content: "{twitter.description}|{og.description}"
+    - name: twitter:url
+      content: "{twitter.url}|{og.url}|{seo.urls.canonical}"
+    - name: twitter:card
+      content: "{twitter.card}|{og.type}|summary_large_image"
+    - name: twitter:image
+      content: "{twitter.image.url}|{og.image.url}"
+    - name: twitter:alt
+      content: "{twitter.image.alt}|{og.image.alt}"
+    - name: twitter:creator
+      content: "{twitter.creator}|{twitter.site.name}|{twitter.handle}"
+    - name: twitter:player
+      content: "{twitter.player.name}"
+    - name: twitter:player:width
+      content: "{twitter.player.width}"
+    - name: twitter:player:height
+      content: "{twitter.player.height}"
+    - name: twitter:player:stream
+      content: "{twitter.player.stream}"
+    - name: twitter:app:name:iphone
+      content: "{twitter.app.iphone.name}"
+    - name: twitter:app:id:iphone
+      content: "{twitter.app.iphone.id}"
+    - name: twitter:app:url:iphone
+      content: "{twitter.app.iphone.url}"
+    - name: twitter:app:name:ipad
+      content: "{twitter.app.ipad.name}"
+    - name: twitter:app:id:ipad
+      content: "{twitter.app.ipad.id}"
+    - name: twitter:app:url:ipad
+      content: "{twitter.app.ipad.url}"
+    - name: twitter:app:name:googleplay
+      content: "{twitter.app.googleplay.name}"
+    - name: twitter:app:id:googleplay
+      content: "{twitter.app.googleplay.id}"
+    - name: twitter:app:url:googleplay
+      content: "{twitter.app.googleplay.url}"
+
+    # SEO
+    - name: description
+      content: "{seo.description}"
+    - name: twitter:description
+      content: "{seo.description}"
+    - name: msapplication-TileColor
+      content: "#ffffff"
+    - name: msapplication-config
+      content: "/favicon/browserconfig.xml"
+    - name: theme-color
+      content: "#ffffff"
+    - itemprop: name
+      content: "{title}"
+    - itemprop: description
+      content: "{seo.description}"
+    - itemprop: image
+      content: "{seo.image}"
+
+    ## Open Graph
+    - property: og:type
+      content: "{og.type}|website"
+    - property: og:title
+      content: "{og.title}|{$config.app.name}"
+    - property: og:site_name
+      content: "{og.site_name}|{$config.app.name}"
+    - property: og:description
+      content: "{seo.description}"
+    - property: og:url
+      content: "{og.url}|{seo.urls.canonical}"
+    - property: og:determiner
+      content: '{og.determiner}'
+
+    - property: og:locale
+      content: "{og.locale.current}"
+    - property: og:locale:alternate
+      content: "{og.locale.alternate:value}"
+
+    - property: og:image
+      content: "{og.image.url}"
+    - property: og:image:width
+      content: '{og.image.width}|1200'
+    - property: og:image:height
+      content: '{og.image.height}|630'
+    - property: og:image:secure_url
+      content: '{og.image.secure_url}'
+    - property: og:image:type
+      content: '{og.image.type}'
+    - property: og:image:alt
+      content: '{og.image.alt}'
+
+    - property: og:video
+      content: "{og.video.url}"
+    - property: og:video:url
+      content: "{og.video.url}"
+    - property: og:video:width
+      content: '{og.video.width}'
+    - property: og:video:height
+      content: '{og.video.height}'
+    - property: og:video:secure_url
+      content: '{og.video.secure_url}|{og.video.url}'
+    - property: og:video:type
+      content: '{og.video.type}'
+    - property: og:video:alt
+      content: '{og.video.alt}'
+
+    - property: og:audio
+      content: '{og.audio}'
+    - property: og:audio:secure_url
+      content: '{og.audio.secure_url}'
+    - property: og:audio:type
+      content: '{og.audio.type}'
+
+    # LINK
+    link:
+    - rel: manifest
+      href: "/favicon/site.webmanifest"
+
+    # ICONS
+    - rel: icon
+      href: "/favicon/favicon.ico"
+    - rel: icon" type="image/png
+      sizes: 32x32
+      href: "/favicon/favicon-32x32.png"
+    - rel: icon" type="image/png
+      sizes: 16x16
+    - rel: apple-touch-icon
+      sizes: 180x180
+      href: "/favicon/apple-touch-icon.png"
+    - rel: mask-icon
+      href: /favicon/safari-pinned-tab.svg
+      color: "#1d1d1d"
+    - rel: shortcut icon
+      href: "/favicon/favicon.ico"
+
+    # URLs
+    - rel: canonical
+      href: "{seo.urls.canonical}"
+    - rel: alternate
+      href: "{seo.urls.hreflang:value}"
+      hreflang: "{seo.urls.hreflang:key}"
