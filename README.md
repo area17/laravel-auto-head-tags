@@ -35,7 +35,7 @@ return view('welcome', [
 ]);
 ```
 
-The script should generate, out of the box, this set of tags for you:
+To generate, out of the box, this set of tags for you:
 
 ``` html
 <title>Your page title</title>
@@ -61,6 +61,8 @@ The script should generate, out of the box, this set of tags for you:
 <meta name="description" content="The meta description for the page" />
 <link rel="canonical" href="https://site.com/the-article-slug" />        
 ```
+
+[The list of tags is larger](https://github.com/area17/twill-head/blob/master/config/twill-head.yaml), but if you don't provide enough information to create those tags, they won't be created.
 
 ## Install
 
