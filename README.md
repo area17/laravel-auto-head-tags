@@ -88,8 +88,6 @@ Add the tag `@twillhead` to your main template:
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
     <head>
-        <title>{{ config('app.name') }}</title>
-
         <meta name="version" charset="@version">
 
         @twillhead
@@ -129,7 +127,7 @@ tags:
       content: "{head.apple-mobile-web-app-title}|{og.title}|{$config.app.name}"
 ```
 
-You can define macros using `{}` and the package can access the Blade data using the "dot" notation for arrays:
+You can define macros to access Blade data, using `{}`, and the package can resolve them using the "dot" notation for arrays:
 
 ``` yaml
 content: "{head.author}"
@@ -138,7 +136,7 @@ content: "{head.author}"
 You can define as many fallbacks you need for those macros:
 
 ``` yaml
-content: "{head.apple-mobile-web-app-title}|{og.title}|{title}"
+title: "{title}|{head.title}|{seo.title}|{og.title}|{$config.app.name}"
 ```
 
 And you can also access data from the Laravel config:

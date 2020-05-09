@@ -21,7 +21,7 @@ tag:
 tags:
     # TITLE
 
-    title: "{title}|{head.title}|{seo.title}|{og.title}"
+    title: "{title}|{head.title}|{seo.title}|{og.title}|{$config.app.name}"
 
     # META
 
