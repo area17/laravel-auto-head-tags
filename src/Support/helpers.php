@@ -1,7 +1,6 @@
 <?php
 
 use Illuminate\Support\Str;
-use Illuminate\Support\Collection;
 
 if (!function_exists('to_collection_recursive')) {
     /**
@@ -20,7 +19,7 @@ if (!function_exists('to_collection_recursive')) {
     }
 }
 
-if (!function_exists('to_collection_recursive')) {
+if (!function_exists('is_traversable')) {
     /**
      * @param $subject
      * @return bool
@@ -120,5 +119,16 @@ if (!function_exists('image_type_from_url')) {
             case 'webp':
                 return IMAGETYPE_WEBP;
         }
+    }
+}
+
+if (!function_exists('keys_are_all_numeric')) {
+    function keys_are_all_numeric($array)
+    {
+        return collect($array)
+            ->keys()
+            ->reduce(function ($keep, $key) {
+                return $keep && is_integer($key);
+            }, true);
     }
 }

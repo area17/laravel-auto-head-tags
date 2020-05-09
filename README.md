@@ -21,13 +21,13 @@ return view('welcome', [
         'description' => 'The meta description for the page',
 
         'urls' => [
-            'canonical' => 'https://site.com/the-article-slug
+            'canonical' => 'https://site.com/the-article-slug'
         ],
-    ]
+    ],
 
     'twitter' => [
         'handle' => '@opticalcortex'
-    ]
+    ],
 
     'image' => [
         'url' => 'https://site.com/image.jpg'
