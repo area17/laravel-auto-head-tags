@@ -44,55 +44,7 @@ tags:
     - name: apple-mobile-web-app-title
       content: "{head.apple-mobile-web-app-title}|{og.title}|{$config.app.name}"
 
-    # TWITTER
-    - name: twitter:title
-      content: "{twitter.title}|{og.title}|{$config.app.name}"
-    - name: twitter:site
-      content: "{twitter.site.name}|{twitter.handle}"
-    - name: twitter:site:id
-      content: "{twitter.site.id}"
-    - name: twitter:description
-      content: "{twitter.description}|{og.description}"
-    - name: twitter:url
-      content: "{twitter.url}|{og.url}|{seo.urls.canonical}"
-    - name: twitter:card
-      content: "{twitter.card}|{og.type}|summary_large_image"
-    - name: twitter:image
-      content: "{twitter.image.url}|{og.image.url}"
-    - name: twitter:alt
-      content: "{twitter.image.alt}|{og.image.alt}"
-    - name: twitter:creator
-      content: "{twitter.creator}|{twitter.site.name}|{twitter.handle}"
-    - name: twitter:player
-      content: "{twitter.player.name}"
-    - name: twitter:player:width
-      content: "{twitter.player.width}"
-    - name: twitter:player:height
-      content: "{twitter.player.height}"
-    - name: twitter:player:stream
-      content: "{twitter.player.stream}"
-    - name: twitter:app:name:iphone
-      content: "{twitter.app.iphone.name}"
-    - name: twitter:app:id:iphone
-      content: "{twitter.app.iphone.id}"
-    - name: twitter:app:url:iphone
-      content: "{twitter.app.iphone.url}"
-    - name: twitter:app:name:ipad
-      content: "{twitter.app.ipad.name}"
-    - name: twitter:app:id:ipad
-      content: "{twitter.app.ipad.id}"
-    - name: twitter:app:url:ipad
-      content: "{twitter.app.ipad.url}"
-    - name: twitter:app:name:googleplay
-      content: "{twitter.app.googleplay.name}"
-    - name: twitter:app:id:googleplay
-      content: "{twitter.app.googleplay.id}"
-    - name: twitter:app:url:googleplay
-      content: "{twitter.app.googleplay.url}"
-
     # SEO
-    - name: title
-      content: "{seo.title}"
     - name: description
       content: "{seo.description}"
     - name: msapplication-TileColor
@@ -106,7 +58,7 @@ tags:
     - itemprop: description
       content: "{seo.description}"
     - itemprop: image
-      content: "{seo.image}"
+      content: "{seo.image.url}|{og.image.url}"
 
     ## Open Graph
     - property: og:type
@@ -116,7 +68,7 @@ tags:
     - property: og:site_name
       content: "{og.site-name}|{$config.app.name}"
     - property: og:description
-      content: "{seo.description}"
+      content: "{og.description}|{seo.description}"
     - property: og:url
       content: "{og.url}|{seo.urls.canonical}"
     - property: og:determiner
@@ -161,6 +113,52 @@ tags:
       content: '{og.audio.secure-url}'
     - property: og:audio:type
       content: '{og.audio.type}'
+
+    # TWITTER
+    - name: twitter:title
+      content: "{twitter.title}|{og.title}|{$config.app.name}"
+    - name: twitter:site
+      content: "{twitter.site.name}|{twitter.handle}"
+    - name: twitter:site:id
+      content: "{twitter.site.id}"
+    - name: twitter:description
+      content: "{twitter.description}|{og.description}|{seo.description}"
+    - name: twitter:url
+      content: "{twitter.url}|{og.url}|{seo.urls.canonical}"
+    - name: twitter:card
+      content: "{twitter.card}|summary_large_image"
+    - name: twitter:image
+      content: "{twitter.image.url}|{og.image.url}"
+    - name: twitter:alt
+      content: "{twitter.image.alt}|{og.image.alt}"
+    - name: twitter:creator
+      content: "{twitter.creator}|{twitter.site.name}|{twitter.handle}"
+    - name: twitter:player
+      content: "{twitter.player.name}"
+    - name: twitter:player:width
+      content: "{twitter.player.width}"
+    - name: twitter:player:height
+      content: "{twitter.player.height}"
+    - name: twitter:player:stream
+      content: "{twitter.player.stream}"
+    - name: twitter:app:name:iphone
+      content: "{twitter.app.iphone.name}"
+    - name: twitter:app:id:iphone
+      content: "{twitter.app.iphone.id}"
+    - name: twitter:app:url:iphone
+      content: "{twitter.app.iphone.url}"
+    - name: twitter:app:name:ipad
+      content: "{twitter.app.ipad.name}"
+    - name: twitter:app:id:ipad
+      content: "{twitter.app.ipad.id}"
+    - name: twitter:app:url:ipad
+      content: "{twitter.app.ipad.url}"
+    - name: twitter:app:name:googleplay
+      content: "{twitter.app.googleplay.name}"
+    - name: twitter:app:id:googleplay
+      content: "{twitter.app.googleplay.id}"
+    - name: twitter:app:url:googleplay
+      content: "{twitter.app.googleplay.url}"
 
     # LINK
     link:
