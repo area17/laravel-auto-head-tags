@@ -45,20 +45,20 @@ To generate, out of the box, this set of tags for you:
 <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1" />\n
 <meta name="mobile-web-app-capable" content="yes" />\n
 <meta name="apple-mobile-web-app-capable" content="yes" />\n
-<meta name="apple-mobile-web-app-title" content="Laravel" />\n
+<meta name="apple-mobile-web-app-title" content="Your page title" />\n
 <meta name="description" content="The meta description for the page" />\n
 <meta name="msapplication-TileColor" content="#ffffff" />\n
 <meta name="msapplication-config" content="/favicon/browserconfig.xml" />\n
 <meta name="theme-color" content="#ffffff" />\n
 <meta itemprop="description" content="The meta description for the page" />\n
 <meta property="og:type" content="website" />\n
-<meta property="og:title" content="Laravel" />\n
+<meta property="og:title" content="Your page title" />\n
 <meta property="og:site_name" content="Laravel" />\n
 <meta property="og:description" content="The meta description for the page" />\n
 <meta property="og:url" content="https://site.com/the-article-slug" />\n
 <meta property="og:image:width" content="1200" />\n
 <meta property="og:image:height" content="630" />\n
-<meta name="twitter:title" content="Laravel" />\n
+<meta name="twitter:title" content="Your page title" />\n
 <meta name="twitter:site" content="@opticalcortex" />\n
 <meta name="twitter:description" content="The meta description for the page" />\n
 <meta name="twitter:url" content="https://site.com/the-article-slug" />\n

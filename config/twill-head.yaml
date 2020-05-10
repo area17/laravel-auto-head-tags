@@ -64,7 +64,7 @@ tags:
     - property: og:type
       content: "{og.type}|website"
     - property: og:title
-      content: "{og.title}|{$config.app.name}"
+      content: "{og.title}|{seo.title}|{$config.app.name}"
     - property: og:site_name
       content: "{og.site-name}|{$config.app.name}"
     - property: og:description
