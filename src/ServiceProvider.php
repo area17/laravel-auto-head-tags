@@ -34,10 +34,10 @@ class ServiceProvider extends IlluminateServiceProvider
         $this->publishes(
             [
                 __DIR__ . '/../config/twill-head.yaml' => config_path(
-                    'twill-head.yaml',
-                ),
+                    'twill-head.yaml'
+                )
             ],
-            'config',
+            'config'
         );
     }
 
@@ -62,7 +62,7 @@ class ServiceProvider extends IlluminateServiceProvider
 
         (new Yaml())->loadToConfig(
             file_exists($app) ? $app : $package,
-            'twill-head',
+            'twill-head'
         );
     }
 }

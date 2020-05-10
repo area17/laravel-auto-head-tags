@@ -144,16 +144,18 @@ class Head
      */
     private function fillUpNonArrayProperties(Collection $properties)
     {
-        $traversable = $properties->first(
-            fn($property) => is_traversable($property),
-        );
+        $traversable = $properties->first(function ($property) {
+            return is_traversable($property);
+        });
 
         return $properties->map(function ($value) use ($traversable) {
             if (is_traversable($value)) {
                 return $value;
             }
 
-            return $traversable->map(fn($_) => $value);
+            return $traversable->map(function () use ($value) {
+                return $value;
+            });
         });
     }
 
@@ -170,7 +172,7 @@ class Head
         $properties = $this->fillUpNonArrayProperties(
             $properties->map(function ($property) {
                 return $this->explodePropertyLoop($property);
-            }),
+            })
         );
 
         $result = [];
@@ -205,10 +207,9 @@ class Head
         return collect($tags)
             ->map(function ($properties) use ($tagName) {
                 return $this->generatePropertiesArray($properties)->map(
-                    fn($properties) => $this->generateTag(
-                        $tagName,
-                        $properties,
-                    ),
+                    function ($properties) use ($tagName) {
+                        return $this->generateTag($tagName, $properties);
+                    }
                 );
             })
             ->filter();
@@ -226,8 +227,8 @@ class Head
                 $tagName,
                 $tags,
                 'tag.without_properties_format',
-                'tag.value_only_format',
-            ),
+                'tag.value_only_format'
+            )
         )->filter();
     }
 
@@ -366,7 +367,7 @@ class Head
         $value = $this->generateProperties(
             $tagName,
             $value,
-            $propertiesFormat,
+            $propertiesFormat
         )->implode(' ');
 
         if (filled($value)) {
@@ -375,7 +376,7 @@ class Head
                     ['{tagName}', '{value}'],
                     [$tagName, $value],
 
-                    $this->config($tagFormat),
+                    $this->config($tagFormat)
                 );
         }
 
@@ -393,7 +394,9 @@ class Head
         $properties,
         $format = 'tag.property_format'
     ) {
-        $properties = collect($properties)->map(function ($value, $key) use ($format) {
+        $properties = collect($properties)->map(function ($value, $key) use (
+            $format
+        ) {
             $value = $this->generateValue($value);
 
             return [
@@ -403,9 +406,9 @@ class Head
                     ? str_replace(
                         ['{propertyName}', '{value}'],
                         [$key, $value],
-                        $this->config($format),
+                        $this->config($format)
                     )
-                    : null,
+                    : null
             ];
         });
 
@@ -416,7 +419,9 @@ class Head
             return collect();
         }
 
-        return $properties->map(fn($property) => $property['rendered']);
+        return $properties->map(function ($property) {
+            return $property['rendered'];
+        });
     }
 
     /**
@@ -450,8 +455,12 @@ class Head
     public function generateValue($value)
     {
         return collect(explode($this->getFallbackDelimiter(), $value))
-            ->map(fn($value) => $this->makeValue($value))
-            ->first(fn($value) => filled($value));
+            ->map(function ($value) {
+                return $this->makeValue($value);
+            })
+            ->first(function ($value) {
+                return filled($value);
+            });
     }
 
     /**
@@ -490,7 +499,7 @@ class Head
 
         return [
             Str::before($value, $delimiter),
-            Str::after($value, $delimiter),
+            Str::after($value, $delimiter)
         ];
     }
 

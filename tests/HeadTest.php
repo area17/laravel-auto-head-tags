@@ -23,58 +23,56 @@ class HeadTest extends TestCase
 
                 'hreflang' => [
                     'fr' => 'https://site.com/fr/the-article-slug',
-                    'en' => 'https://site.com/en/the-article-slug',
-                ],
-            ],
+                    'en' => 'https://site.com/en/the-article-slug'
+                ]
+            ]
         ],
 
         'twitter' => [
-            'handle' => '@opticalcortex',
+            'handle' => '@opticalcortex'
         ],
 
         'image' => [
-            'url' => 'https://site.com/image.jpg',
+            'url' => 'https://site.com/image.jpg'
         ],
 
         'og' => [
+            'title' => 'OG - Your page title',
 
-                'title' => 'OG - Your page title',
+            'site-name' => 'App name',
 
-                'site-name' => 'App name',
+            'locale' => ['current' => 'fr', 'alternate' => ['fr', 'en']],
 
-                'locale' => ['current' => 'fr', 'alternate' => ['fr', 'en']],
+            'type' => null,
 
-                'type' => null,
+            'description' => 'Description',
 
-                'description' => 'Description',
+            'url' => 'https://site.com/article-slug',
 
-                'url' => 'https://site.com/article-slug',
+            'image' => [
+                'url' => 'https://site.com/article-slug/image.jpg',
 
-                'image' => [
-                    'url' => 'https://site.com/article-slug/image.jpg',
+                'secure-url' => 'https://site.com/article-slug/image.jpg',
 
-                    'secure-url' => 'https://site.com/article-slug/image.jpg',
+                'alt' => 'Image alt',
 
-                    'alt' => 'Image alt',
+                'type' => 'image/jpeg',
 
-                    'type' => 'image/jpeg',
+                'width' => '800',
 
-                    'width' => '800',
+                'height' => '600'
+            ],
 
-                    'height' => '600',
-                ],
+            'video' => [
+                'url' => 'http://site.com/article-slug/video.mp4',
 
-                'video' => [
-                    'url' => 'http://site.com/article-slug/video.mp4',
+                'secure-url' => 'https://site.com/article-slug/video.mp4',
 
-                    'secure-url' => 'https://site.com/article-slug/video.mp4',
+                'alt' => 'Video alt',
 
-                    'alt' => 'Video alt',
-
-                    'type' => 'text/html',
-                ],
-
-        ],
+                'type' => 'text/html'
+            ]
+        ]
     ];
 
     public function setUp(): void
@@ -103,6 +101,9 @@ class HeadTest extends TestCase
     {
         $rendered = $this->head->render();
 
-        $this->assertStringContainsString('<meta name="twitter:title" content="OG - Your page title" />', $rendered);
+        $this->assertStringContainsString(
+            '<meta name="twitter:title" content="OG - Your page title" />',
+            $rendered
+        );
     }
 }

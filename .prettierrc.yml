@@ -1,0 +1,21 @@
+### General
+trailingComma: all
+printWidth: 80
+tabWidth: 4
+useTabs: false
+singleQuote: true
+requirePragma: false
+insertPragma: false
+
+### JavaScript
+semi: false
+
+### VueJS
+vueIndentScriptAndStyle: true
+
+### PHP
+phpVersion: "7.4"
+trailingCommaPHP: false
+braceStyle: psr-2
+
+
