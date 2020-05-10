@@ -38,28 +38,40 @@ return view('welcome', [
 To generate, out of the box, this set of tags for you:
 
 ``` html
-<title>Your page title</title>
-<meta name="title" content="Your page title" />
-<meta charset="utf-8" />
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<meta http-equiv="X-UA-Compatible" content="IE=Edge" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1" />
-<meta name="mobile-web-app-capable" content="yes" />
-<meta name="apple-mobile-web-app-capable" content="yes" />
-<meta name="apple-mobile-web-app-title" content="Your page title" />
-<meta property="og:title" content="Your page title" />
-<meta property="og:url" content="https://site.com/the-article-slug" />
-<meta property="og:image" content="https://site.com/image.jpg" />
-<meta property="og:image:secure_url" content="https://site.com/image.jpg" />
-<meta property="og:description" content="The meta description for the page" />
-<meta name="twitter:title" content="Your page title" />
-<meta name="twitter:card" content="summary_large_image" />
-<meta name="twitter:url" content="https://site.com/the-article-slug" />
-<meta name="twitter:image" content="https://site.com/image.jpg" />
-<meta name="twitter:site" content="@opticalcortex" />
-<meta name="twitter:creator" content="@opticalcortex" />
-<meta name="description" content="The meta description for the page" />
-<link rel="canonical" href="https://site.com/the-article-slug" />        
+<title>Your page title</title>\n
+<meta charset="utf-8" />\n
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />\n
+<meta http-equiv="X-UA-Compatible" content="IE=Edge" />\n
+<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1" />\n
+<meta name="mobile-web-app-capable" content="yes" />\n
+<meta name="apple-mobile-web-app-capable" content="yes" />\n
+<meta name="apple-mobile-web-app-title" content="Laravel" />\n
+<meta name="description" content="The meta description for the page" />\n
+<meta name="msapplication-TileColor" content="#ffffff" />\n
+<meta name="msapplication-config" content="/favicon/browserconfig.xml" />\n
+<meta name="theme-color" content="#ffffff" />\n
+<meta itemprop="description" content="The meta description for the page" />\n
+<meta property="og:type" content="website" />\n
+<meta property="og:title" content="Laravel" />\n
+<meta property="og:site_name" content="Laravel" />\n
+<meta property="og:description" content="The meta description for the page" />\n
+<meta property="og:url" content="https://site.com/the-article-slug" />\n
+<meta property="og:image:width" content="1200" />\n
+<meta property="og:image:height" content="630" />\n
+<meta name="twitter:title" content="Laravel" />\n
+<meta name="twitter:site" content="@opticalcortex" />\n
+<meta name="twitter:description" content="The meta description for the page" />\n
+<meta name="twitter:url" content="https://site.com/the-article-slug" />\n
+<meta name="twitter:card" content="summary_large_image" />\n
+<meta name="twitter:creator" content="@opticalcortex" />\n
+<link rel="manifest" href="/favicon/site.webmanifest" />\n
+<link rel="icon" href="/favicon/favicon.ico" />\n
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon/favicon-32x32.png" />\n
+<link rel="icon" type="image/png" sizes="16x16" />\n
+<link rel="apple-touch-icon" sizes="180x180" href="/favicon/apple-touch-icon.png" />\n
+<link rel="mask-icon" href="/favicon/safari-pinned-tab.svg" color="#1d1d1d" />\n
+<link rel="shortcut icon" href="/favicon/favicon.ico" />\n
+<link rel="canonical" href="https://site.com/the-article-slug" />
 ```
 
 [The list of tags is larger](https://github.com/area17/twill-head/blob/master/config/twill-head.yaml), but if you don't provide enough information to create those tags, they won't be created.

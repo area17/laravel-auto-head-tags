@@ -10,7 +10,7 @@ class HeadTest extends TestCase
     /**
      * @var \A17\TwillHead\Head
      */
-    private Head $head;
+    private $head;
 
     protected $data = [
         'seo' => [
@@ -102,8 +102,6 @@ class HeadTest extends TestCase
     public function testCanRenderHead()
     {
         $rendered = $this->head->render();
-
-        dd($rendered);
 
         $this->assertStringContainsString('<meta name="twitter:title" content="OG - Your page title" />', $rendered);
     }
