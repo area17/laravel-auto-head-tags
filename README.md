@@ -1,4 +1,4 @@
-# Twill Head
+# Laravel Auto Head Tags
 
 [![Latest Version on Packagist][ico-version]][link-packagist]
 [![Software License][ico-license]](LICENSE.md)
@@ -74,33 +74,33 @@ To generate, out of the box, this set of tags for you:
 <link rel="canonical" href="https://site.com/the-article-slug" />
 ```
 
-[The list of tags is larger](https://github.com/area17/twill-head/blob/master/config/twill-head.yaml), but if you don't provide enough information to create those tags, they won't be created.
+[The list of tags is larger](https://github.com/area17/laravel-auto-head-tags/blob/master/config/laravel-auto-head-tags.yaml), but if you don't provide enough information to create those tags, they won't be created.
 
 ## Install
 
 ### Via Composer
 
 ``` bash
-composer require area17/twill-head
+composer require area17/laravel-auto-head-tags
 ```
 
 ### Publish the config file
 
 ``` bash
-php artisan vendor:publish --provider="A17\TwillHead\ServiceProvider"
+php artisan vendor:publish --provider="A17\LaravelAutoHeadTags\ServiceProvider"
 ```
 
 # Using
 
 ## Add to your blade template
 
-Add the tag `@twillhead` to your main template:
+Add the tag `@head` to your main template:
 
 ``` html
 <!DOCTYPE html>
 <html lang="{{ locale() }}">
     <head>
-        @twillhead
+        @head
 
         ...
     </head>
@@ -109,9 +109,11 @@ Add the tag `@twillhead` to your main template:
 </html>
 ``` 
 
+This directive is also configurable, just publish the configuration and change the `blade.directive`.
+
 ## Configuring 
 
-All available tags are on the config file: `config/twill-head.yaml`, and everything is configurable. This is an extract of the tags section:
+All available tags are on the config file: `config/laravel-auto-head-tags.yaml`, and everything is configurable. This is an extract of the tags section:
 
 ``` yaml
 # TAGS
@@ -199,17 +201,17 @@ If you discover any security related issues, please email antonio@area17.com ins
 
 The MIT License (MIT). Please see [License File](LICENSE.md) for more information.
 
-[ico-version]: https://img.shields.io/packagist/v/area17/twill-head.svg?style=flat-square
+[ico-version]: https://img.shields.io/packagist/v/area17/laravel-auto-head-tags.svg?style=flat-square
 [ico-license]: https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat-square
-[ico-travis]: https://img.shields.io/travis/area17/twill-head/master.svg?style=flat-square
-[ico-scrutinizer]: https://img.shields.io/scrutinizer/coverage/g/area17/twill-head.svg?style=flat-square
-[ico-code-quality]: https://img.shields.io/scrutinizer/g/area17/twill-head.svg?style=flat-square
-[ico-downloads]: https://img.shields.io/packagist/dt/area17/twill-head.svg?style=flat-square
+[ico-travis]: https://img.shields.io/travis/area17/laravel-auto-head-tags/master.svg?style=flat-square
+[ico-scrutinizer]: https://img.shields.io/scrutinizer/coverage/g/area17/laravel-auto-head-tags.svg?style=flat-square
+[ico-code-quality]: https://img.shields.io/scrutinizer/g/area17/laravel-auto-head-tags.svg?style=flat-square
+[ico-downloads]: https://img.shields.io/packagist/dt/area17/laravel-auto-head-tags.svg?style=flat-square
 
-[link-packagist]: https://packagist.org/packages/area17/twill-head
-[link-travis]: https://travis-ci.org/area17/twill-head
-[link-scrutinizer]: https://scrutinizer-ci.com/g/area17/twill-head/code-structure
-[link-code-quality]: https://scrutinizer-ci.com/g/area17/twill-head
-[link-downloads]: https://packagist.org/packages/area17/twill-head
+[link-packagist]: https://packagist.org/packages/area17/laravel-auto-head-tags
+[link-travis]: https://travis-ci.org/area17/laravel-auto-head-tags
+[link-scrutinizer]: https://scrutinizer-ci.com/g/area17/laravel-auto-head-tags/code-structure
+[link-code-quality]: https://scrutinizer-ci.com/g/area17/laravel-auto-head-tags
+[link-downloads]: https://packagist.org/packages/area17/laravel-auto-head-tags
 [link-author]: https://github.com/antonioribeiro
 [link-contributors]: ../../contributors

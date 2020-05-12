@@ -1,12 +1,12 @@
 {
-    "name": "area17/twill-head",
+    "name": "area17/laravel-auto-head-tags",
     "type": "library",
     "description": "Twill Head helps you build the list of head elements for your app",
     "keywords": [
         "area17",
-        "twill-head"
+        "laravel-auto-head-tags"
     ],
-    "homepage": "https://github.com/area17/twill-head",
+    "homepage": "https://github.com/area17/laravel-auto-head-tags",
     "license": "MIT",
     "authors": [
         {
@@ -27,13 +27,13 @@
     },
     "autoload": {
         "psr-4": {
-            "A17\\TwillHead\\": "src"
+            "A17\\LaravelAutoHeadTags\\": "src"
         },
         "files": ["src/Support/helpers.php"]
     },
     "autoload-dev": {
         "psr-4": {
-            "A17\\TwillHead\\Tests\\": "tests"
+            "A17\\LaravelAutoHeadTags\\Tests\\": "tests"
         }
     },
     "scripts": {
@@ -44,11 +44,11 @@
     "extra": {
         "laravel": {
             "providers": [
-                "A17\\TwillHead\\ServiceProvider"
+                "A17\\LaravelAutoHeadTags\\ServiceProvider"
             ]
         },
         "branch-alias": {
-            "dev-master": "1.0-dev"
+            "dev-master": "2.0-dev"
         }
     },
     "config": {

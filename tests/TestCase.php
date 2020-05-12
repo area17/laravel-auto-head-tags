@@ -1,8 +1,8 @@
 <?php
 
-namespace A17\TwillHead\Tests;
+namespace A17\LaravelAutoHeadTags\Tests;
 
-use A17\TwillHead\ServiceProvider;
+use A17\LaravelAutoHeadTags\ServiceProvider;
 use Orchestra\Testbench\TestCase as OrchestraTestCase;
 
 class TestCase extends OrchestraTestCase

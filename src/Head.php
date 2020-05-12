@@ -1,6 +1,6 @@
 <?php
 
-namespace A17\TwillHead;
+namespace A17\LaravelAutoHeadTags;
 
 use Illuminate\Support\Str;
 use Illuminate\Support\Arr;
@@ -545,9 +545,9 @@ class Head
     public function config($key = null)
     {
         if (blank($key)) {
-            return $this->config['twill-head'];
+            return $this->config['laravel-auto-head-tags'];
         }
 
-        return Arr::get($this->config, "twill-head.{$key}");
+        return Arr::get($this->config, "laravel-auto-head-tags.{$key}");
     }
 }

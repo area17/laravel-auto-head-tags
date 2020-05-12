@@ -1,5 +1,7 @@
 ---
 # CONFIG
+blade:
+    directive: head
 config:
     key: "$config"
 delimiters:

@@ -2,7 +2,7 @@
 
 Contributions are **welcome** and will be fully **credited**.
 
-We accept contributions via Pull Requests on [Github](https://github.com/area17/twill-head).
+We accept contributions via Pull Requests on [Github](https://github.com/area17/laravel-auto-head-tags).
 
 
 ## Pull Requests

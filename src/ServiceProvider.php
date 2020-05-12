@@ -1,6 +1,6 @@
 <?php
 
-namespace A17\TwillHead;
+namespace A17\LaravelAutoHeadTags;
 
 use PragmaRX\Yaml\Package\Yaml;
 use Illuminate\Support\Facades\Blade;
@@ -33,8 +33,8 @@ class ServiceProvider extends IlluminateServiceProvider
     {
         $this->publishes(
             [
-                __DIR__ . '/../config/twill-head.yaml' => config_path(
-                    'twill-head.yaml'
+                __DIR__ . '/../config/laravel-auto-head-tags.yaml' => config_path(
+                    'laravel-auto-head-tags.yaml'
                 )
             ],
             'config'
@@ -46,8 +46,8 @@ class ServiceProvider extends IlluminateServiceProvider
      */
     public function configureBlade()
     {
-        Blade::directive('twillhead', function ($expression) {
-            return '<?php echo (new A17\TwillHead\Head($__data))->render(); ?>';
+        Blade::directive(config('laravel-auto-head-tags.blade.directive'), function ($expression) {
+            return '<?php echo (new A17\LaravelAutoHeadTags\Head($__data))->render(); ?>';
         });
     }
 
@@ -56,13 +56,13 @@ class ServiceProvider extends IlluminateServiceProvider
      */
     public function mergeConfig()
     {
-        $app = config_path('twill-head.yaml');
+        $app = config_path('laravel-auto-head-tags.yaml');
 
-        $package = __DIR__ . '/../config/twill-head.yaml';
+        $package = __DIR__ . '/../config/laravel-auto-head-tags.yaml';
 
         (new Yaml())->loadToConfig(
             file_exists($app) ? $app : $package,
-            'twill-head'
+            'laravel-auto-head-tags'
         );
     }
 }

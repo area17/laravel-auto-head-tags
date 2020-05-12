@@ -1,14 +1,14 @@
 <?php
 
-namespace A17\TwillHead\Tests;
+namespace A17\LaravelAutoHeadTags\Tests;
 
-use A17\TwillHead\Head;
+use A17\LaravelAutoHeadTags\Head;
 use Illuminate\Support\Facades\Blade;
 
 class HeadTest extends TestCase
 {
     /**
-     * @var \A17\TwillHead\Head
+     * @var \A17\LaravelAutoHeadTags\Head
      */
     private $head;
 
@@ -84,15 +84,15 @@ class HeadTest extends TestCase
 
     public function testCanLoadConfig()
     {
-        $this->assertEquals('$config', config('twill-head.config.key'));
+        $this->assertEquals('$config', config('laravel-auto-head-tags.config.key'));
     }
 
     public function testCanCompileBladeExtension()
     {
-        $bladeSnippet = '@twillhead';
+        $bladeSnippet = '@head';
 
         $expectedCode =
-            '<?php echo (new A17\TwillHead\Head($__data))->render(); ?>';
+            '<?php echo (new A17\LaravelAutoHeadTags\Head($__data))->render(); ?>';
 
         $this->assertEquals($expectedCode, Blade::compileString($bladeSnippet));
     }
