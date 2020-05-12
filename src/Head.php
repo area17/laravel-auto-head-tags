@@ -5,9 +5,12 @@ namespace A17\LaravelAutoHeadTags;
 use Illuminate\Support\Str;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Collection;
+use A17\LaravelAutoHeadTags\Behaviors\Macro;
 
 class Head
 {
+    use Macro;
+
     /**
      * @var \Illuminate\Support\Collection
      */
@@ -21,7 +24,7 @@ class Head
     /**
      * @var boolean
      */
-    private $firstLineRendered = false;
+    protected $firstLineRendered = false;
 
     /**
      * Head constructor.
@@ -36,113 +39,10 @@ class Head
     }
 
     /**
-     * @param string $property
-     * @return bool
-     */
-    private function containsLoop($property)
-    {
-        return filled($this->extractVarFromLoopMacro($property));
-    }
-
-    /**
-     * @param string $property
-     * @return bool
-     */
-    private function containsMacro($property)
-    {
-        return filled($this->extractMacro($property));
-    }
-
-    /**
-     * @param string $property
-     * @return string|\Illuminate\Support\Collection
-     */
-    private function explodePropertyLoop($property)
-    {
-        if (!$this->containsLoop($property)) {
-            return $property;
-        }
-
-        $key = $this->extractVarFromLoopMacro($property);
-
-        $macro = $this->extractMacroFromLoopMacro($property);
-
-        if (blank($macro)) {
-            return $property;
-        }
-
-        return collect($this->makeValueFromMacro($macro))
-            ->map(function ($value, $key) {
-                return compact('value', 'key');
-            })
-            ->map(function ($values) use ($key) {
-                return $values[$key];
-            });
-    }
-
-    /**
-     * @param string $property
-     * @return string|null
-     */
-    private function extractAndCleanMacro($property)
-    {
-        if (blank($macro = $this->extractMacro($property))) {
-            return null;
-        }
-
-        return $this->removeConfigKeyFromMacro($macro);
-    }
-
-    /**
-     * @param string $property
-     * @return string|null
-     */
-    private function extractMacroFromLoopMacro($property)
-    {
-        $macro = $this->extractAndCleanMacro($property);
-
-        if (!Str::contains($macro, $this->getLoopDelimiter())) {
-            return null;
-        }
-
-        return Str::beforeLast($macro, $this->getLoopDelimiter());
-    }
-
-    /**
-     * @param string $property
-     * @return string|null
-     */
-    private function extractVarFromLoopMacro($property)
-    {
-        $macro = $this->extractAndCleanMacro($property);
-
-        if (!Str::contains($macro, $this->getLoopDelimiter())) {
-            return null;
-        }
-
-        return Str::afterLast($macro, $this->getLoopDelimiter());
-    }
-
-    /**
-     * @param string $value
-     * @return string|null
-     */
-    private function extractMacro($value)
-    {
-        preg_match_all($this->getMacroRegexParser(), $value, $matches);
-
-        if (blank($matches[1][0] ?? null)) {
-            return null;
-        }
-
-        return $matches[1][0];
-    }
-
-    /**
      * @param \Illuminate\Support\Collection $properties
      * @return \Illuminate\Support\Collection
      */
-    private function fillUpNonArrayProperties(Collection $properties)
+    protected function fillUpNonArrayProperties(Collection $properties)
     {
         $traversable = $properties->first(function ($property) {
             return is_traversable($property);
@@ -191,19 +91,13 @@ class Head
         return collect($result);
     }
 
-    private function generateTagWithValue(string $tagName, string $value)
-    {
-    }
-
     /**
      * @param string $tagName
      * @param array|\Illuminate\Support\Collection $tags
      * @return \Illuminate\Support\Collection
      */
-    private function generateTagsWithProperties(
-        $tagName,
-        $tags
-    ): Collection {
+    protected function generateTagsWithProperties($tagName, $tags): Collection
+    {
         return collect($tags)
             ->map(function ($properties) use ($tagName) {
                 return $this->generatePropertiesArray($properties)->map(
@@ -220,7 +114,7 @@ class Head
      * @param array|string|\Illuminate\Support\Collection $tags
      * @return \Illuminate\Support\Collection
      */
-    private function generateTagsWithoutProperties($tagName, $tags): Collection
+    protected function generateTagsWithoutProperties($tagName, $tags): Collection
     {
         return collect(
             $this->generateTag(
@@ -235,7 +129,7 @@ class Head
     /**
      * @return mixed
      */
-    private function getConfigKey()
+    protected function getConfigKey()
     {
         return $this->config('config.key');
     }
@@ -243,7 +137,7 @@ class Head
     /**
      * @return string
      */
-    private function getFallbackDelimiter()
+    protected function getFallbackDelimiter()
     {
         return $this->config('delimiters.fallback');
     }
@@ -251,7 +145,7 @@ class Head
     /**
      * @return string
      */
-    private function getIndent()
+    protected function getIndent()
     {
         if (!$this->firstLineRendered) {
             $this->firstLineRendered = true;
@@ -261,68 +155,6 @@ class Head
 
         return str_repeat(' ', $this->config('tag.indent.spaces')) .
             str_repeat("\t", $this->config('tag.indent.tabs'));
-    }
-
-    /**
-     * @return string
-     */
-    private function getLoopDelimiter()
-    {
-        return $this->config('delimiters.loop');
-    }
-
-    /**
-     * @return string
-     */
-    private function getMacroRegexParser()
-    {
-        return $this->config('macro.regex_parser');
-    }
-
-    /**
-     * @param string $macro
-     * @return array|mixed|null
-     */
-    private function makeValueFromMacro($macro)
-    {
-        return Str::contains($macro, '.')
-            ? $this->makeValueFromMacroArray($macro)
-            : $this->makeValueFromMacroVariable($macro);
-    }
-
-    /**
-     * @param string $macro
-     * @return mixed|null
-     */
-    private function makeValueFromMacroVariable($macro)
-    {
-        return $this->data[$macro] ?? null;
-    }
-
-    /**
-     * @param \Illuminate\Support\Collection $properties
-     * @return mixed
-     */
-    private function propertiesContainsLoops(Collection $properties)
-    {
-        return $properties->reduce(function ($keep, $property) {
-            return $keep ||
-                ($this->containsMacro($property) &&
-                    $this->containsLoop($property));
-        }, false);
-    }
-
-    /**
-     * @param string $macro
-     * @return string
-     */
-    private function removeConfigKeyFromMacro($macro): string
-    {
-        $macro = Str::startsWith($macro, $this->getConfigKey())
-            ? Str::after($macro, $this->getConfigKey())
-            : $macro;
-
-        return $macro;
     }
 
     /**
@@ -514,28 +346,6 @@ class Head
         }
 
         return $this->makeValueFromMacro($macro);
-    }
-
-    /**
-     * @param string $variable
-     * @return array|mixed
-     */
-    public function makeValueFromMacroArray($variable)
-    {
-        $keys = Str::after($variable, '.');
-
-        $variable = Str::before($variable, '.');
-
-        $value =
-            $variable === $this->getConfigKey()
-                ? $this->config
-                : $this->data[$variable] ?? collect();
-
-        if (is_traversable($value)) {
-            return Arr::get(to_array($value), $keys);
-        }
-
-        return $value;
     }
 
     /**

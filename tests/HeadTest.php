@@ -84,7 +84,10 @@ class HeadTest extends TestCase
 
     public function testCanLoadConfig()
     {
-        $this->assertEquals('$config', config('laravel-auto-head-tags.config.key'));
+        $this->assertEquals(
+            '$config',
+            config('laravel-auto-head-tags.config.key')
+        );
     }
 
     public function testCanCompileBladeExtension()

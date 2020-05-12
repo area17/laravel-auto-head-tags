@@ -33,7 +33,8 @@ class ServiceProvider extends IlluminateServiceProvider
     {
         $this->publishes(
             [
-                __DIR__ . '/../config/laravel-auto-head-tags.yaml' => config_path(
+                __DIR__ .
+                '/../config/laravel-auto-head-tags.yaml' => config_path(
                     'laravel-auto-head-tags.yaml'
                 )
             ],
@@ -46,9 +47,12 @@ class ServiceProvider extends IlluminateServiceProvider
      */
     public function configureBlade()
     {
-        Blade::directive(config('laravel-auto-head-tags.blade.directive'), function ($expression) {
-            return '<?php echo (new A17\LaravelAutoHeadTags\Head($__data))->render(); ?>';
-        });
+        Blade::directive(
+            config('laravel-auto-head-tags.blade.directive'),
+            function ($expression) {
+                return '<?php echo (new A17\LaravelAutoHeadTags\Head($__data))->render(); ?>';
+            }
+        );
     }
 
     /**
