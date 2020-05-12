@@ -21,6 +21,7 @@
         "pragmarx/yaml": "^1.0"
     },
     "require-dev": {
+        "nunomaduro/larastan": "^0.5.8",
         "orchestra/testbench": "^5.2",
         "phpunit/phpunit": ">=8.0",
         "squizlabs/php_codesniffer": "^3.0"
@@ -37,9 +38,12 @@
         }
     },
     "scripts": {
-        "test": "phpunit",
-        "check-style": "phpcs src tests",
-        "fix-style": "phpcbf src tests"
+        "test:phpunit": "vendor/bin/phpunit --colors=always",
+        "test:analyse": "php -d memory_limit=-1 vendor/bin/phpstan analyse",
+        "test": [
+            "@test:syntax",
+            "@test:phpunit"
+        ]
     },
     "extra": {
         "laravel": {

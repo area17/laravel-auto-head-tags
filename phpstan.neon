@@ -1,0 +1,20 @@
+includes:
+  - ./vendor/nunomaduro/larastan/extension.neon
+
+parameters:
+
+  paths:
+    - src
+    - config
+    - tests
+
+  # 8 is the highest level
+  level: 1
+
+  autoload_files:
+    - src/Support/helpers.php
+
+  ignoreErrors:
+
+  excludes_analyse:
+    - tests/stubs/*

@@ -64,13 +64,6 @@ if (!function_exists('image_mime_type')) {
     }
 }
 
-if (!function_exists('video_mime_type')) {
-    function video_mime_type($video)
-    {
-        return video_type_to_mime_type(video_type_from_url($video));
-    }
-}
-
 if (!function_exists('image_type_from_url')) {
     function image_type_from_url($url)
     {
