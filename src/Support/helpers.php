@@ -4,7 +4,7 @@ use Illuminate\Support\Str;
 
 if (!function_exists('to_collection_recursive')) {
     /**
-     * @param $array
+     * @param array $array
      * @return \Illuminate\Support\Collection
      */
     function to_collection_recursive($array)
@@ -21,7 +21,7 @@ if (!function_exists('to_collection_recursive')) {
 
 if (!function_exists('is_traversable')) {
     /**
-     * @param $subject
+     * @param mixed $subject
      * @return bool
      */
     function is_traversable($subject)

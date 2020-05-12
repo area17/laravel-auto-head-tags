@@ -26,7 +26,7 @@ class Head
     /**
      * Head constructor.
      *
-     * @param $data
+     * @param array|\Illuminate\Support\Collection $data
      */
     public function __construct($data)
     {
@@ -36,7 +36,7 @@ class Head
     }
 
     /**
-     * @param $property
+     * @param string $property
      * @return bool
      */
     private function containsLoop($property)
@@ -45,7 +45,7 @@ class Head
     }
 
     /**
-     * @param $property
+     * @param string $property
      * @return bool
      */
     private function containsMacro($property)
@@ -54,8 +54,8 @@ class Head
     }
 
     /**
-     * @param $property
-     * @return \Illuminate\Support\Collection
+     * @param string $property
+     * @return string|\Illuminate\Support\Collection
      */
     private function explodePropertyLoop($property)
     {
@@ -81,7 +81,7 @@ class Head
     }
 
     /**
-     * @param $property
+     * @param string $property
      * @return string|null
      */
     private function extractAndCleanMacro($property)
@@ -94,7 +94,7 @@ class Head
     }
 
     /**
-     * @param $property
+     * @param string $property
      * @return string|null
      */
     private function extractMacroFromLoopMacro($property)
@@ -109,7 +109,7 @@ class Head
     }
 
     /**
-     * @param $property
+     * @param string $property
      * @return string|null
      */
     private function extractVarFromLoopMacro($property)
@@ -124,7 +124,7 @@ class Head
     }
 
     /**
-     * @param $value
+     * @param string $value
      * @return string|null
      */
     private function extractMacro($value)
@@ -139,7 +139,7 @@ class Head
     }
 
     /**
-     * @param $properties
+     * @param \Illuminate\Support\Collection $properties
      * @return \Illuminate\Support\Collection
      */
     private function fillUpNonArrayProperties(Collection $properties)
@@ -160,7 +160,7 @@ class Head
     }
 
     /**
-     * @param $properties
+     * @param \Illuminate\Support\Collection $properties
      * @return \Illuminate\Support\Collection
      */
     protected function generatePropertiesArray(Collection $properties)
@@ -196,14 +196,14 @@ class Head
     }
 
     /**
-     * @param $tagName
-     * @param $tags
+     * @param string $tagName
+     * @param array|\Illuminate\Support\Collection $tags
      * @return \Illuminate\Support\Collection
      */
     private function generateTagsWithProperties(
         $tagName,
         $tags
-    ): \Illuminate\Support\Collection {
+    ): Collection {
         return collect($tags)
             ->map(function ($properties) use ($tagName) {
                 return $this->generatePropertiesArray($properties)->map(
@@ -216,8 +216,8 @@ class Head
     }
 
     /**
-     * @param $tagName
-     * @param $tags
+     * @param string $tagName
+     * @param array|string|\Illuminate\Support\Collection $tags
      * @return \Illuminate\Support\Collection
      */
     private function generateTagsWithoutProperties($tagName, $tags): Collection
@@ -280,7 +280,7 @@ class Head
     }
 
     /**
-     * @param $macro
+     * @param string $macro
      * @return array|mixed|null
      */
     private function makeValueFromMacro($macro)
@@ -291,7 +291,7 @@ class Head
     }
 
     /**
-     * @param $macro
+     * @param string $macro
      * @return mixed|null
      */
     private function makeValueFromMacroVariable($macro)
@@ -300,7 +300,7 @@ class Head
     }
 
     /**
-     * @param $properties
+     * @param \Illuminate\Support\Collection $properties
      * @return mixed
      */
     private function propertiesContainsLoops(Collection $properties)
@@ -313,7 +313,7 @@ class Head
     }
 
     /**
-     * @param $macro
+     * @param string $macro
      * @return string
      */
     private function removeConfigKeyFromMacro($macro): string
@@ -340,8 +340,8 @@ class Head
     }
 
     /**
-     * @param $tagName
-     * @param $tags
+     * @param string $tagName
+     * @param string|array|\Illuminate\Support\Collection $tags
      * @return \Illuminate\Support\Collection
      */
     public function generateTags($tagName, $tags)
@@ -352,8 +352,8 @@ class Head
     }
 
     /**
-     * @param $tagName
-     * @param $value
+     * @param string $tagName
+     * @param string $value
      * @param string $tagFormat
      * @param string $propertiesFormat
      * @return string|null
@@ -384,8 +384,8 @@ class Head
     }
 
     /**
-     * @param $tagName
-     * @param $properties
+     * @param string $tagName
+     * @param \Illuminate\Support\Collection $properties
      * @param string $format
      * @return \Illuminate\Support\Collection
      */
@@ -425,8 +425,8 @@ class Head
     }
 
     /**
-     * @param $properties
-     * @param $tagName
+     * @param \Illuminate\Support\Collection $properties
+     * @param string $tagName
      * @return bool
      */
     protected function linkIsBlank($properties, $tagName): bool
@@ -437,8 +437,8 @@ class Head
     }
 
     /**
-     * @param $properties
-     * @param $tagName
+     * @param \Illuminate\Support\Collection $properties
+     * @param string $tagName
      * @return bool
      */
     protected function metaIsBlank($properties, $tagName): bool
@@ -449,7 +449,7 @@ class Head
     }
 
     /**
-     * @param $value
+     * @param string $value
      * @return array|mixed|null
      */
     public function generateValue($value)
@@ -475,18 +475,18 @@ class Head
     }
 
     /**
-     * @param array $data
+     * @param array|\Illuminate\Support\Collection $data
      * @return Head
      */
-    public function setData(array $data): Head
+    public function setData($data): Head
     {
-        $this->data = $data;
+        $this->data = collect($data);
 
         return $this;
     }
 
     /**
-     * @param $value
+     * @param string $value
      * @return array
      */
     public function splitDefault($value)
@@ -504,7 +504,7 @@ class Head
     }
 
     /**
-     * @param $value
+     * @param string $value
      * @return array|mixed|null
      */
     public function makeValue($value)
@@ -517,7 +517,7 @@ class Head
     }
 
     /**
-     * @param $variable
+     * @param string $variable
      * @return array|mixed
      */
     public function makeValueFromMacroArray($variable)
@@ -539,7 +539,7 @@ class Head
     }
 
     /**
-     * @param null $key
+     * @param null|string $key
      * @return mixed
      */
     public function config($key = null)
