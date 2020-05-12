@@ -7,10 +7,6 @@ php:
   - 7.4
   - nightly
 
-jobs:
-    allow_failures:
-        - php: nightly
-
 cache:
   directories:
     - $HOME/.composer/cache
@@ -19,6 +15,8 @@ matrix:
   include:
     - php: 7.2
       env: 'COMPOSER_FLAGS="--prefer-stable --prefer-lowest"'
+  allow_failures:
+      - php: nightly
 
 install:
     - |
