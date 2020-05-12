@@ -5,6 +5,7 @@ php:
   - 7.2
   - 7.3
   - 7.4
+  - nightly
 
 ## Cache composer
 cache:
@@ -16,8 +17,13 @@ matrix:
     - php: 7.2
       env: 'COMPOSER_FLAGS="--prefer-stable --prefer-lowest"'
 
-before_script:
-  - travis_retry composer update ${COMPOSER_FLAGS} --no-interaction --prefer-dist
+install:
+    - |
+        if [[ "$TRAVIS_PHP_VERSION" == 'nightly' ]]; then
+          travis_retry composer update ${COMPOSER_FLAGS} --ignore-platform-reqs --no-interaction --prefer-dist
+        else
+          travis_retry composer update ${COMPOSER_FLAGS} --no-interaction --prefer-dist
+        fi
 
 script:
   - vendor/bin/phpunit --coverage-text --coverage-clover=coverage.clover
