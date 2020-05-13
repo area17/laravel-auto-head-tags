@@ -1,7 +1,7 @@
 {
     "name": "area17/laravel-auto-head-tags",
     "type": "library",
-    "description": "Twill Head helps you build the list of head elements for your app",
+    "description": "Laravel Auto Head Tags helps you build the list of head elements for your app",
     "keywords": [
         "area17",
         "laravel-auto-head-tags"
