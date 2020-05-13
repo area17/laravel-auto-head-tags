@@ -13,7 +13,7 @@ This package aims to ease the creating of all HTML head tags: meta, links, SEO, 
 
 The package will grab all the info it needs from the data sent to Blade:
 
-``` php
+```php
 return view('welcome', [
     'seo' => [
         'title' => 'Your page title',
@@ -37,7 +37,7 @@ return view('welcome', [
 
 To generate, out of the box, this set of tags for you:
 
-``` html
+```html
 <title>Your page title</title>\n
 <meta charset="utf-8" />\n
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />\n
@@ -80,13 +80,13 @@ To generate, out of the box, this set of tags for you:
 
 ### Via Composer
 
-``` bash
+```bash
 composer require area17/laravel-auto-head-tags
 ```
 
 ### Publish the config file
 
-``` bash
+```bash
 php artisan vendor:publish --provider="A17\LaravelAutoHeadTags\ServiceProvider"
 ```
 
@@ -96,7 +96,7 @@ php artisan vendor:publish --provider="A17\LaravelAutoHeadTags\ServiceProvider"
 
 Add the tag `@head` to your main template:
 
-``` html
+```html
 <!DOCTYPE html>
 <html lang="{{ locale() }}">
     <head>
@@ -107,7 +107,7 @@ Add the tag `@head` to your main template:
 
     ...
 </html>
-``` 
+```
 
 This directive is also configurable, just publish the configuration and change the `blade.directive`.
 
@@ -115,7 +115,7 @@ This directive is also configurable, just publish the configuration and change t
 
 All available tags are on the config file: `config/laravel-auto-head-tags.yaml`, and everything is configurable. This is an extract of the tags section:
 
-``` yaml
+```yaml
 # TAGS
 tags:
     # META
@@ -139,25 +139,25 @@ tags:
 
 You can define macros to access Blade data, using `{}`, and the package can resolve them using the "dot" notation for arrays:
 
-``` yaml
+```yaml
 content: "{head.author}"
 ```
 
 You can define as many fallbacks you need for those macros:
 
-``` yaml
+```yaml
 title: "{title}|{head.title}|{seo.title}|{og.title}|{$config.app.name}"
 ```
 
 And you can also access data from the Laravel config:
 
-``` yaml
+```yaml
 content: "{$config.app.name}"
 ```
 
 If it's required to generate more than one URL for a single tag definition, there's `loop` concept:
 
-``` yaml
+```yaml
 - rel: canonical
   href: "{seo.urls.canonical}"
 - rel: alternate
@@ -167,7 +167,7 @@ If it's required to generate more than one URL for a single tag definition, ther
 
 If `seo.urls.hreflang` is an array made of locales (`key`) and URLs (`value`), this configuration will generate these tags:
 
-``` html
+```html
 <link rel="canonical" href="http://site.com/fr/events/event-slug" />
 <link rel="alternate" href="http://site.com/fr/evenements/event-slug" hreflang="fr" />
 <link rel="alternate" href="http://site.com/en/events/event-slug" hreflang="en" />
@@ -179,7 +179,7 @@ Please see [CHANGELOG](CHANGELOG.md) for more information on what has changed re
 
 ## Testing
 
-``` bash
+```bash
 $ composer test
 ```
 
@@ -203,7 +203,7 @@ The MIT License (MIT). Please see [License File](LICENSE.md) for more informatio
 
 [ico-version]: https://img.shields.io/packagist/v/area17/laravel-auto-head-tags.svg?style=flat-square
 [ico-license]: https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat-square
-[ico-travis]: https://img.shields.io/travis/area17/laravel-auto-head-tags/master.svg?style=flat-square
+[ico-travis]: https://scrutinizer-ci.com/g/area17/laravel-auto-head-tags/badges/build.png?b=master&style=flat-square
 [ico-scrutinizer]: https://img.shields.io/scrutinizer/coverage/g/area17/laravel-auto-head-tags.svg?style=flat-square
 [ico-code-quality]: https://img.shields.io/scrutinizer/g/area17/laravel-auto-head-tags.svg?style=flat-square
 [ico-downloads]: https://img.shields.io/packagist/dt/area17/laravel-auto-head-tags.svg?style=flat-square
