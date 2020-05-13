@@ -8,6 +8,10 @@ use Illuminate\Support\Collection;
 
 trait Macro
 {
+    abstract public function config($key = null);
+
+    abstract protected function getConfigKey();
+
     /**
      * @param string $property
      * @return bool

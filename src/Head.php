@@ -6,10 +6,11 @@ use Illuminate\Support\Str;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Collection;
 use A17\LaravelAutoHeadTags\Behaviors\Macro;
+use A17\LaravelAutoHeadTags\Behaviors\Config;
 
 class Head
 {
-    use Macro;
+    use Macro, Config;
 
     /**
      * @var \Illuminate\Support\Collection
@@ -127,14 +128,6 @@ class Head
     }
 
     /**
-     * @return mixed
-     */
-    protected function getConfigKey()
-    {
-        return $this->config('config.key');
-    }
-
-    /**
      * @return string
      */
     protected function getFallbackDelimiter()
@@ -185,7 +178,7 @@ class Head
 
     /**
      * @param string $tagName
-     * @param string $value
+     * @param string|array|\Illuminate\Support\Collection $value
      * @param string $tagFormat
      * @param string $propertiesFormat
      * @return string|null
@@ -217,7 +210,7 @@ class Head
 
     /**
      * @param string $tagName
-     * @param \Illuminate\Support\Collection $properties
+     * @param string|array|\Illuminate\Support\Collection $properties
      * @param string $format
      * @return \Illuminate\Support\Collection
      */
@@ -346,18 +339,5 @@ class Head
         }
 
         return $this->makeValueFromMacro($macro);
-    }
-
-    /**
-     * @param null|string $key
-     * @return mixed
-     */
-    public function config($key = null)
-    {
-        if (blank($key)) {
-            return $this->config['laravel-auto-head-tags'];
-        }
-
-        return Arr::get($this->config, "laravel-auto-head-tags.{$key}");
     }
 }

@@ -49,7 +49,7 @@ class ServiceProvider extends IlluminateServiceProvider
     {
         Blade::directive(
             config('laravel-auto-head-tags.blade.directive'),
-            function ($expression) {
+            function () {
                 return '<?php echo (new A17\LaravelAutoHeadTags\Head($__data))->render(); ?>';
             }
         );
