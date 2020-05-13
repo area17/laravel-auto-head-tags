@@ -209,7 +209,7 @@ The MIT License (MIT). Please see [License File](LICENSE.md) for more informatio
 [ico-downloads]: https://img.shields.io/packagist/dt/area17/laravel-auto-head-tags.svg?style=flat-square
 
 [link-packagist]: https://packagist.org/packages/area17/laravel-auto-head-tags
-[link-travis]: https://travis-ci.org/area17/laravel-auto-head-tags
+[link-travis]: https://travis-ci.com/github/area17/laravel-auto-head-tags
 [link-scrutinizer]: https://scrutinizer-ci.com/g/area17/laravel-auto-head-tags/code-structure
 [link-code-quality]: https://scrutinizer-ci.com/g/area17/laravel-auto-head-tags
 [link-downloads]: https://packagist.org/packages/area17/laravel-auto-head-tags
