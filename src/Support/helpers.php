@@ -39,6 +39,8 @@ if (!function_exists('to_array')) {
 
         if (is_array($collection)) {
             $collection = collect($collection);
+        } else {
+            $collection = collect($collection->toArray());
         }
 
         $collection = $collection->map(function ($item) {
