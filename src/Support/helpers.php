@@ -34,6 +34,10 @@ if (!function_exists('is_traversable')) {
 if (!function_exists('to_array')) {
     function to_array($collection)
     {
+        if ($collection instanceof stdClass) {
+            $collection = collect(json_decode(json_encode($collection), true));
+        }
+
         if ($collection instanceof Model) {
             $collection = $collection->toArray();
         }
