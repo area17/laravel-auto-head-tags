@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Str;
+use Illuminate\Database\Eloquent\Model;
 
 if (!function_exists('to_collection_recursive')) {
     /**
@@ -33,6 +34,10 @@ if (!function_exists('is_traversable')) {
 if (!function_exists('to_array')) {
     function to_array($collection)
     {
+        if ($collection instanceof Model) {
+            $collection = $collection->toArray();
+        }
+
         if (!is_traversable($collection)) {
             return $collection;
         }
