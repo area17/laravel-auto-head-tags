@@ -115,8 +115,10 @@ class Head
      * @param array|string|\Illuminate\Support\Collection $tags
      * @return \Illuminate\Support\Collection
      */
-    protected function generateTagsWithoutProperties($tagName, $tags): Collection
-    {
+    protected function generateTagsWithoutProperties(
+        $tagName,
+        $tags
+    ): Collection {
         return collect(
             $this->generateTag(
                 $tagName,
