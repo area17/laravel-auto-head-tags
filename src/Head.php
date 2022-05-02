@@ -232,7 +232,7 @@ class Head
                 'rendered' => filled($value)
                     ? str_replace(
                         ['{propertyName}', '{value}'],
-                        [$key, $value],
+                        [$key, is_string($value) ? $value : '{value}'],
                         $this->config($format)
                     )
                     : null
