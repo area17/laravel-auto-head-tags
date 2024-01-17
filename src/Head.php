@@ -281,13 +281,15 @@ class Head
      */
     public function generateValue($value)
     {
-        return collect(explode($this->getFallbackDelimiter(), $value))
+        $value = collect(explode($this->getFallbackDelimiter(), $value))
             ->map(function ($value) {
                 return $this->makeValue($value);
             })
             ->first(function ($value) {
                 return filled($value);
             });
+
+        return $this->sanitizeForMeta($value);    
     }
 
     /**
@@ -341,5 +343,18 @@ class Head
         }
 
         return $this->makeValueFromMacro($macro);
+    }
+
+    /**
+     * @param string $value
+     * @return mixed
+     */
+    public function sanitizeForMeta($value)
+    {
+        if (is_string($value)) {
+            $value = trim(str_replace('"', '', $value));
+        }
+
+        return $value;
     }
 }
